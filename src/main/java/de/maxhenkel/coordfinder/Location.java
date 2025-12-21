@@ -1,12 +1,12 @@
 package de.maxhenkel.coordfinder;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 
 import javax.annotation.Nullable;
 
-public record Location(ResourceLocation dimension, BlockPos position) {
+public record Location(Identifier dimension, BlockPos position) {
     @Nullable
     public static Location fromString(String locStr) {
         String[] split = locStr.split(",");
@@ -14,7 +14,7 @@ public record Location(ResourceLocation dimension, BlockPos position) {
             return null;
         }
 
-        ResourceLocation dimension = ResourceLocation.tryParse(split[0]);
+        Identifier dimension = Identifier.tryParse(split[0]);
         if (dimension == null) {
             return null;
         }
@@ -33,7 +33,7 @@ public record Location(ResourceLocation dimension, BlockPos position) {
     }
 
     public static Location fromPlayer(ServerPlayer player) {
-        return new Location(player.level().dimension().location(), player.blockPosition());
+        return new Location(player.level().dimension().identifier(), player.blockPosition());
     }
 
     @Override

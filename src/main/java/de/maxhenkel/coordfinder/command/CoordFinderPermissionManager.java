@@ -37,7 +37,7 @@ public class CoordFinderPermissionManager implements PermissionManager<CommandSo
                 return p.hasPermission(stack.getPlayer());
             }
             if (p.getType().equals(PermissionType.OPS)) {
-                return stack.hasPermission(stack.getServer().getFunctionCompilationLevel());
+                return stack.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_MODERATOR);
             } else {
                 return p.hasPermission(null);
             }
@@ -102,7 +102,7 @@ public class CoordFinderPermissionManager implements PermissionManager<CommandSo
             return switch (this) {
                 case EVERYONE -> true;
                 case NOONE -> false;
-                case OPS -> player != null && player.hasPermissions(player.level().getServer().operatorUserPermissionLevel());
+                case OPS -> player != null && player.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_MODERATOR);
             };
         }
 

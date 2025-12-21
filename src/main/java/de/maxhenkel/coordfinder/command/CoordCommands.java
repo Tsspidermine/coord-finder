@@ -149,7 +149,7 @@ public class CoordCommands {
                     , false);
             return;
         }
-        Location loc = new Location(dimension.dimension().location(), new BlockPos((int) location.x, (int) location.y, (int) location.z));
+        Location loc = new Location(dimension.dimension().identifier(), new BlockPos((int) location.x, (int) location.y, (int) location.z));
         CoordFinder.PLACE_CONFIG.setPlace(placeName, loc);
 
         context.getSource().sendSuccess(() ->
